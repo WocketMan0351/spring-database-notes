@@ -25,6 +25,7 @@ public class SpringDatabaseNotesApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// fire a query
 		LOGGER.info("All users -> {}", dao.findAll());
+		LOGGER.info("User id 10001 -> {}", dao.findById(10001));
 	}
 
 }

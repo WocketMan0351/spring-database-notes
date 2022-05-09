@@ -18,12 +18,21 @@ public class PersonJdbcDAO {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	// select * from person
+	/**
+	 * Uses static SQL to return a List of Person objects from our H2 db.
+	 */
 	public List<Person> findAll() {
 		return jdbcTemplate.query("select * from person",
 				new BeanPropertyRowMapper<Person>(Person.class));
 		// the bean for which the BeanPropertyRowMapper is defined needs to have a
 		// default constructor
+	}
+
+	public Person findById(int id) {
+		return jdbcTemplate.queryForObject(
+				"select * from person where id=?",
+				new BeanPropertyRowMapper<Person>(Person.class),
+				new Object[] { id });
 	}
 
 }
