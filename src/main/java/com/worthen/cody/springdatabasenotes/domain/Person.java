@@ -1,6 +1,6 @@
 package com.worthen.cody.springdatabasenotes.domain;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Person {
 

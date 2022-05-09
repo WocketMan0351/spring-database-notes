@@ -38,8 +38,12 @@ public class SpringDatabaseNotesApplication implements CommandLineRunner {
 		LOGGER.info("Inserting user with id=10005 -> ({}) user inserted\n",
 				dao.insert(new Person(10005, "Buttercup", "Gilbert, AZ", new java.sql.Date(0))));
 
+		LOGGER.info("User with id=10005 -> {}\n", dao.findById(10005));
+
 		LOGGER.info("Updating user with id=10005 -> ({}) user updated\n",
 				dao.update(new Person(10005, "Uhtred", "Bebbanburg", new java.sql.Date(0))));
+
+		LOGGER.info("User with id=10005 -> {}\n", dao.findById(10005));
 	}
 
 }

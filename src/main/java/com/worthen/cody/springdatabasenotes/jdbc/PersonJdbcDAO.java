@@ -1,17 +1,38 @@
 package com.worthen.cody.springdatabasenotes.jdbc;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.worthen.cody.springdatabasenotes.domain.Person;
 
 @Repository
 public class PersonJdbcDAO {
+
+	/**
+	 * We can create a custom RowMapper if the data that comes back from a query is
+	 * of a different structure/format than our bean (in this case Person and
+	 * Person's encapsulated data).
+	 */
+	private class PersonRowMapper implements RowMapper<Person> {
+		@Override
+		public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Person person = new Person();
+			// map it from the table to a Person object
+			person.setId(rs.getInt("id"));
+			person.setName(rs.getString("name"));
+			person.setLocation(rs.getString("location"));
+			person.setBirthDate(rs.getTimestamp("birth_date"));
+			return person;
+		}
+	}
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -20,19 +41,20 @@ public class PersonJdbcDAO {
 	}
 
 	/**
-	 * Uses static SQL to return a List of Person objects from db.
+	 * Uses static SQL to return a List of Person objects from db. Demonstrates how
+	 * to use our own custom RowMapper defined in PersonJdbcDAO.
 	 */
 	public List<Person> findAll() {
 		return jdbcTemplate.query("select * from person",
-				new BeanPropertyRowMapper<Person>(Person.class));
-		// the bean for which the BeanPropertyRowMapper is defined needs to have a
-		// default constructor
+				new PersonRowMapper());
 	}
 
 	/**
 	 * Uses static SQL to return a (unique) Person by id from db.
 	 */
 	public Person findById(int id) {
+		// the bean for which the BeanPropertyRowMapper is defined needs to have a
+		// default constructor
 		return jdbcTemplate.queryForObject(
 				"select * from person where id=?",
 				new BeanPropertyRowMapper<Person>(Person.class),
