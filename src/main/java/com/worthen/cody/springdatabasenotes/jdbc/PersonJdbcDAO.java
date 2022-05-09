@@ -1,5 +1,6 @@
 package com.worthen.cody.springdatabasenotes.jdbc;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,6 +40,13 @@ public class PersonJdbcDAO {
 	}
 
 	/**
+	 * Uses static SQL to delete a Person by id from db.
+	 */
+	public int deleteById(int id) {
+		return jdbcTemplate.update("delete from person where id=?", new Object[] { id });
+	}
+
+	/**
 	 * Uses static SQL to return a List of all Persons with matching name from db.
 	 */
 	public List<Person> findByName(String name) {
@@ -57,6 +65,31 @@ public class PersonJdbcDAO {
 				"select * from person where location=?",
 				new BeanPropertyRowMapper<Person>(Person.class),
 				new Object[] { location });
+	}
+
+	/**
+	 * Inserts a new Person into the db.
+	 */
+	public int insert(Person person) {
+		return jdbcTemplate.update(
+				"insert into person(id, name, location, birth_date) "
+						+ "values(?, ?, ?, ?)",
+				new Object[] { person.getId(), person.getName(), person.getLocation(),
+						new Timestamp(person.getBirthDate().getTime()) });
+	}
+
+	/**
+	 * Updates an existing person in the db.
+	 */
+	public int update(Person person) {
+		return jdbcTemplate.update(
+				"update person " + "set name = ?, location = ?, birth_date = ? " + "where id = ? ",
+				new Object[] {
+						person.getName(),
+						person.getLocation(),
+						new Timestamp(person.getBirthDate().getTime()),
+						person.getId()
+				});
 	}
 
 }

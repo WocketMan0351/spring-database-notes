@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.worthen.cody.springdatabasenotes.domain.Person;
 import com.worthen.cody.springdatabasenotes.jdbc.PersonJdbcDAO;
 
 @SpringBootApplication
@@ -15,7 +16,7 @@ public class SpringDatabaseNotesApplication implements CommandLineRunner {
 	private Logger LOGGER = LoggerFactory.getLogger(SpringDatabaseNotesApplication.class);
 
 	@Autowired
-	PersonJdbcDAO dao;
+	private PersonJdbcDAO dao;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDatabaseNotesApplication.class, args);
@@ -23,11 +24,22 @@ public class SpringDatabaseNotesApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// fire a query
+		// fires queries
 		LOGGER.info("All users -> {}\n", dao.findAll());
+
 		LOGGER.info("User with id=10001 -> {}\n", dao.findById(10001));
+
 		LOGGER.info("User(s) with name=Tank -> {}\n", dao.findByName("Tank"));
+
 		LOGGER.info("User(s) with location=Gilbert, AZ -> {}\n", dao.findByLocation("Gilbert, AZ"));
+
+		LOGGER.info("Deleting user with id=10004 -> ({}) user deleted\n", dao.deleteById(10004));
+
+		LOGGER.info("Inserting user with id=10005 -> ({}) user inserted\n",
+				dao.insert(new Person(10005, "Buttercup", "Gilbert, AZ", new java.sql.Date(0))));
+
+		LOGGER.info("Updating user with id=10005 -> ({}) user updated\n",
+				dao.update(new Person(10005, "Uhtred", "Bebbanburg", new java.sql.Date(0))));
 	}
 
 }
