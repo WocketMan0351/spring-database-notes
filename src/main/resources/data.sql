@@ -11,7 +11,7 @@ INSERT INTO PERSON (ID, NAME, LOCATION, BIRTH_DATE)
 VALUES(10001, 'Bella', 'Gilbert, AZ', sysdate());
 
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTH_DATE)
-VALUES(10002, 'Chloe', 'Gilbert, AZ', sysdate());
+VALUES(10002, 'Chloe', 'Scottsdale, AZ', sysdate());
 
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTH_DATE)
 VALUES(10003, 'Tank', 'Gilbert, AZ', sysdate());
