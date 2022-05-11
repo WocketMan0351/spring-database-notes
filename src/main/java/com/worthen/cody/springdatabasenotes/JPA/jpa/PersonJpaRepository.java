@@ -1,7 +1,10 @@
 package com.worthen.cody.springdatabasenotes.JPA.jpa;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -32,6 +35,18 @@ public class PersonJpaRepository {
 	public Person update(Person person) {
 		// automatically chooses to either update or insert according to entity id
 		return entityManager.merge(person);
+	}
+
+	public Person deleteById(int id) {
+		Person person = findById(id);
+		entityManager.remove(person);
+		return person;
+	}
+
+	public List<Person> findAll() {
+		TypedQuery<Person> namedQuery = entityManager.createNamedQuery("find_all_persons",
+				Person.class);
+		return namedQuery.getResultList();
 	}
 
 }

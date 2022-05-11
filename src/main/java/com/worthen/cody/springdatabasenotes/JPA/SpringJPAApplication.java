@@ -37,8 +37,13 @@ public class SpringJPAApplication implements CommandLineRunner {
 		LOGGER.info("Updating person with id 10001 -> {}",
 				repository.update(new Person(10001, "Bella", "Phoenix, AZ", new Date())));
 
+		// let Hibernate auto generate the ID
 		LOGGER.info("Inserting new user -> {}",
 				repository.update(new Person("Bob", "Mesa, AZ", new Date())));
+
+		LOGGER.info("Removing user with ID 10002 -> {}", repository.deleteById(10002));
+
+		LOGGER.info("All users -> {}", repository.findAll());
 	}
 
 }

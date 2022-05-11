@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +22,7 @@ import javax.persistence.Table;
  */
 @Entity // auto maps to a table called person
 @Table(name = "person") // optional, in case table name is different from class name
+@NamedQuery(name = "find_all_persons", query = "select p from Person p") // for findAll()
 public class Person {
 
 	// instance variables are mapped to the columns in the table
