@@ -13,6 +13,10 @@ import com.worthen.cody.springdatabasenotes.springJDBC.jdbc.PersonJdbcDAO;
 @SpringBootApplication
 public class SpringJDBCApplication implements CommandLineRunner {
 
+	/**
+	 * MAKE SURE WE ARE MANUALLY CREATING PERSON TABLE IN SQL BEFORE RUNNING
+	 */
+
 	private Logger LOGGER = LoggerFactory.getLogger(SpringJDBCApplication.class);
 
 	@Autowired
