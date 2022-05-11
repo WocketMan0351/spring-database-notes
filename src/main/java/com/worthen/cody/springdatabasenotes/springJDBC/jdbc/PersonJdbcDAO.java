@@ -1,4 +1,4 @@
-package com.worthen.cody.springdatabasenotes.jdbc;
+package com.worthen.cody.springdatabasenotes.springJDBC.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.worthen.cody.springdatabasenotes.domain.Person;
+import com.worthen.cody.springdatabasenotes.springJDBC.domain.Person;
 
 @Repository
 public class PersonJdbcDAO {
@@ -65,7 +65,8 @@ public class PersonJdbcDAO {
 	 * Uses static SQL to delete a Person by id from db.
 	 */
 	public int deleteById(int id) {
-		return jdbcTemplate.update("delete from person where id=?", new Object[] { id });
+		return jdbcTemplate.update("delete from person where id=?",
+				new Object[] { id });
 	}
 
 	/**
@@ -105,7 +106,7 @@ public class PersonJdbcDAO {
 	 */
 	public int update(Person person) {
 		return jdbcTemplate.update(
-				"update person " + "set name = ?, location = ?, birth_date = ? " + "where id = ? ",
+				"update person set name = ?, location = ?, birth_date = ? where id = ? ",
 				new Object[] {
 						person.getName(),
 						person.getLocation(),

@@ -1,4 +1,4 @@
-package com.worthen.cody.springdatabasenotes;
+package com.worthen.cody.springdatabasenotes.springJDBC;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,19 +7,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.worthen.cody.springdatabasenotes.domain.Person;
-import com.worthen.cody.springdatabasenotes.jdbc.PersonJdbcDAO;
+import com.worthen.cody.springdatabasenotes.springJDBC.domain.Person;
+import com.worthen.cody.springdatabasenotes.springJDBC.jdbc.PersonJdbcDAO;
 
 @SpringBootApplication
-public class SpringDatabaseNotesApplication implements CommandLineRunner {
+public class SpringJDBCApplication implements CommandLineRunner {
 
-	private Logger LOGGER = LoggerFactory.getLogger(SpringDatabaseNotesApplication.class);
+	private Logger LOGGER = LoggerFactory.getLogger(SpringJDBCApplication.class);
 
 	@Autowired
 	private PersonJdbcDAO dao;
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringDatabaseNotesApplication.class, args);
+		SpringApplication.run(SpringJDBCApplication.class, args);
 	}
 
 	@Override

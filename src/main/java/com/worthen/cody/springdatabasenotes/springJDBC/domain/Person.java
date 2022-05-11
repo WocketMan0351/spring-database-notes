@@ -1,4 +1,4 @@
-package com.worthen.cody.springdatabasenotes.domain;
+package com.worthen.cody.springdatabasenotes.springJDBC.domain;
 
 import java.util.Date;
 
